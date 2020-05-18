@@ -1,0 +1,50 @@
+# 开发环境配置
+spring:
+  datasource:
+    dynamic:
+      primary: master #设置默认的数据源或者数据源组,默认值即为master
+      datasource:
+        master:
+          username: root
+          password: aaaaaa
+          driver-class-name: com.mysql.jdbc.Driver
+          url: jdbc:mysql://100.100.200.71:3306/ehall?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+        slave_1:
+          username: root
+          password: aaaaaa
+          driver-class-name: com.mysql.jdbc.Driver
+          url: jdbc:mysql://100.100.200.71:3306/ehall?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+        #......省略
+        #以上会配置一个默认库master，一个组slave下有两个子库slave_1,slave_2
+mybatis-plus:
+  configuration:
+    # sql日志打印
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #是否开启驼峰
+    map-underscore-to-camel-case: true
+    #当查询数据为空时字段返回为null，不加这个查询数据为空时，字段将被隐藏
+    call-setters-on-nulls: true
+  #指定xml映射位置
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.easycomp.entity
+  global-config:
+    #是否控制台 print mybatis-plus 的 LOGO
+    banner: false
+    db-config:
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+#静态资源对外暴露的访问路径
+file:
+  staticAccessPath: /upload/**
+  #文件上传目录（注意Linux和Windows上的目录结构不同 #/home/upload/ )
+  uploadFolder: D://upload/
+
+#swagger的域名
+springfox:
+  documentation:
+    swagger:
+      v2:
+        host: localhost:8181
+#domain地址
+domainurl: http://localhost:8181

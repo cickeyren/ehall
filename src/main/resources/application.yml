@@ -1,0 +1,27 @@
+#多环境配置
+spring:
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+  profiles:
+    # 和我们pom.xml中的指定resource配置相同
+    active: dev
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+      add-mappings: false
+  main:
+    #当遇到同样名字的时候，是否允许覆盖注册
+    allow-bean-definition-overriding: true
+server:
+  port: 8181
+#在application.yml引入log4j2.yml
+logging:
+  config: classpath:log4j2.yml
+  level:
+    org.springframework.web: INFO
+    #Swagger每个@ApiModelProperty注解里example属性都会进行非空判断
+    #AbstractSerializableParameter报错问题
+    io.swagger.models.parameters.AbstractSerializableParameter: error
